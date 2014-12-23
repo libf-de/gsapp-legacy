@@ -1,0 +1,59 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:orientation="vertical" >
+
+    <TextView
+        android:id="@+id/header"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Wählen sie den Server, von\ndem die Daten bezogen\nwerden sollen!" />
+
+   <RadioGroup
+        android:id="@+id/radioGroup1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" >
+
+        <RadioButton
+            android:id="@+id/serverNumar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:checked="true"
+            android:text="Numar Server (thexorg.tk) (empf.)" />
+
+        <RadioButton
+            android:id="@+id/serverProject"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Projektserver (gsapp.thexorg.tk)" />
+
+    </RadioGroup>
+    
+    <LinearLayout
+                 
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:layout_marginTop="10dp">
+    
+      <Button
+         android:id="@+id/serverCancel"
+         android:layout_marginTop="15dp"
+         android:layout_weight="1"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:text="Verwerfen"
+         />
+      
+      <Button
+         android:id="@+id/serverSave"
+         android:layout_marginTop="15dp"
+         android:layout_weight="1"
+         android:layout_width="fill_parent"
+         android:layout_height="wrap_content"
+         android:text="Speichern"
+         />
+   
+     </LinearLayout>
+
+</LinearLayout>

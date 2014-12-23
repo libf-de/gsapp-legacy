@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    package="de.xorg.gsapp"
+    android:versionCode="440"
+    android:versionName="4.4 Gino" >
+
+    <uses-sdk
+        android:minSdkVersion="8" />
+        <!-- android:targetSdkVersion="19"  -->
+
+    <uses-feature
+        android:name="android.hardware.telephony"
+        android:required="false" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    
+    <application
+        android:allowBackup="true"
+        android:icon="@drawable/ic_launcher"
+        android:label="@string/app_name"
+        android:theme="@style/AppTheme" >
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name" >
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+
+        <receiver
+            android:name=".BootChecker"
+            android:enabled="true"
+            android:exported="true"
+            android:label="GSAppAutomaticCheckBootService" >
+            <intent-filter>
+                <action android:name="android.intent.action.BOOT_COMPLETED" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".VPlanViewer"
+            android:label="@string/VPlan" >
+        </activity>
+        <activity
+            android:name=".InternetViewer"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".About"
+            android:label="@string/About" >
+        </activity>
+        <activity
+            android:name=".Settings"
+            android:icon="@drawable/settings"
+            android:label="@string/Settings"
+            android:screenOrientation="portrait" >
+        </activity>
+        <activity
+            android:name=".KontaktAnzeige"
+            android:label="@string/Kontakt" >
+        </activity>
+        <activity
+            android:name=".EssensplanViewer"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name=".Essensbestellung"
+            android:label="@string/app_name" >
+        </activity>
+        <activity
+            android:name="org.acra.CrashReportDialog"
+            android:excludeFromRecents="true"
+            android:finishOnTaskLaunch="true"
+            android:launchMode="singleInstance"
+            android:theme="@android:style/Theme.Dialog" />
+
+        <receiver android:name=".CheckService" >
+        </receiver>
+    </application>
+
+</manifest>

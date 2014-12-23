@@ -1,0 +1,9 @@
+<menu xmlns:android="http://schemas.android.com/apk/res/android" >
+
+    <item android:id="@+id/refresh" android:title="@string/aktualisiere" android:orderInCategory="100"></item>
+    
+    <item android:id="@+id/action_kback" android:showAsAction="always" android:title="Zurück" />
+    <item android:id="@+id/action_kfwd" android:showAsAction="always" android:title="Weiter" />
+    
+
+</menu>

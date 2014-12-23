@@ -1,0 +1,46 @@
+<resources>
+
+    <!--
+        Base application theme, dependent on API level. This theme is replaced
+        by AppBaseTheme from res/values-vXX/styles.xml on newer devices.
+    -->
+    <!-- <style name="AppBaseTheme" parent="android:Theme.Light">
+        <item name="pageMargin">0dp</item>
+        <item name="pageMarginBottom">0dp</item>
+    </style> -->
+    
+    <style name="AppBaseTheme" parent="android:Theme.Light">
+        <item name="pageMargin">0dp</item>
+        <item name="pageMarginBottom">0dp</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppTheme" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="pageMargin">0dp</item>
+        <item name="pageMarginBottom">0dp</item>
+        <item name="android:windowBackground">@color/gsgelb</item>
+    </style>
+
+    <style name="AppThemeSBlack" parent="AppBaseTheme">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="pageMargin">0dp</item>
+        <item name="pageMarginBottom">0dp</item>
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+
+    <!-- Application theme. -->
+    <style name="AppThemeBlack" parent="AppBaseThemeBlack">
+        <!-- All customizations that are NOT specific to a particular API-level can go here. -->
+        <item name="pageMargin">0dp</item>
+        <item name="pageMarginBottom">0dp</item>
+        <item name="android:windowBackground">@color/black</item>
+    </style>
+    
+    <style name="AppBaseThemeBlack" parent="android:Theme">
+        <!-- API 11 theme customizations can go here. -->
+        <item name="pageMargin">0dp</item>
+        <item name="pageMarginBottom">0dp</item>
+    </style>
+
+</resources>

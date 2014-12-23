@@ -1,0 +1,351 @@
+ECLIPSE ANDROID PROJECT IMPORT SUMMARY
+======================================
+
+Manifest Merging:
+-----------------
+Your project uses libraries that provide manifests, and your Eclipse
+project did not explicitly turn on manifest merging. In Android Gradle
+projects, manifests are always merged (meaning that contents from your
+libraries' manifests will be merged into the app manifest. If you had
+manually copied contents from library manifests into your app manifest
+you may need to remove these for the app to build correctly.
+
+Ignored Files:
+--------------
+The following files were *not* copied into the new Gradle project; you
+should evaluate whether these are still needed in your project and if
+so manually move them:
+
+From CardsUILib:
+* .gradle/
+* .gradle/1.6/
+* .gradle/1.6/taskArtifacts/
+* .gradle/1.6/taskArtifacts/cache.properties
+* .gradle/1.6/taskArtifacts/cache.properties.lock
+* .gradle/1.6/taskArtifacts/fileHashes.bin
+* .gradle/1.6/taskArtifacts/fileSnapshots.bin
+* .gradle/1.6/taskArtifacts/outputFileStates.bin
+* .gradle/1.6/taskArtifacts/taskArtifacts.bin
+* build.gradle
+* build/
+* build/bundles/
+* build/bundles/debug/
+* build/bundles/debug/AndroidManifest.xml
+* build/bundles/debug/R.txt
+* build/bundles/debug/classes.jar
+* build/bundles/debug/libs/
+* build/bundles/debug/libs/nineoldandroids-2.4.0.jar
+* build/bundles/debug/res/
+* build/bundles/debug/res/drawable-xhdpi/
+* build/bundles/debug/res/drawable-xhdpi/card_background.9.png
+* build/bundles/debug/res/drawable-xhdpi/card_background_shadow.9.png
+* build/bundles/debug/res/drawable-xhdpi/card_shadow.9.png
+* build/bundles/debug/res/drawable-xhdpi/top_shadow.png
+* build/bundles/debug/res/drawable/
+* build/bundles/debug/res/drawable/card.xml
+* build/bundles/debug/res/layout/
+* build/bundles/debug/res/layout/cards_view.xml
+* build/bundles/debug/res/layout/cards_view_multicolumn.xml
+* build/bundles/debug/res/layout/footer_fragment.xml
+* build/bundles/debug/res/layout/header.xml
+* build/bundles/debug/res/layout/item_card.xml
+* build/bundles/debug/res/layout/item_card_empty_first.xml
+* build/bundles/debug/res/layout/item_card_empty_last.xml
+* build/bundles/debug/res/layout/item_play_card_empty_first.xml
+* build/bundles/debug/res/layout/item_stack.xml
+* build/bundles/debug/res/values/
+* build/bundles/debug/res/values/values.xml
+* build/bundles/release/
+* build/bundles/release/AndroidManifest.xml
+* build/bundles/release/Cards2.jar
+* build/bundles/release/R.txt
+* build/bundles/release/classes.jar
+* build/bundles/release/libs/
+* build/bundles/release/libs/nineoldandroids-2.4.0.jar
+* build/bundles/release/res/
+* build/bundles/release/res/drawable-xhdpi/
+* build/bundles/release/res/drawable-xhdpi/card_background.9.png
+* build/bundles/release/res/drawable-xhdpi/card_background_shadow.9.png
+* build/bundles/release/res/drawable-xhdpi/card_shadow.9.png
+* build/bundles/release/res/drawable-xhdpi/top_shadow.png
+* build/bundles/release/res/drawable/
+* build/bundles/release/res/drawable/card.xml
+* build/bundles/release/res/layout/
+* build/bundles/release/res/layout/cards_view.xml
+* build/bundles/release/res/layout/cards_view_multicolumn.xml
+* build/bundles/release/res/layout/footer_fragment.xml
+* build/bundles/release/res/layout/header.xml
+* build/bundles/release/res/layout/item_card.xml
+* build/bundles/release/res/layout/item_card_empty_first.xml
+* build/bundles/release/res/layout/item_card_empty_last.xml
+* build/bundles/release/res/layout/item_play_card_empty_first.xml
+* build/bundles/release/res/layout/item_stack.xml
+* build/bundles/release/res/values/
+* build/bundles/release/res/values/values.xml
+* build/classes/
+* build/classes/debug/
+* build/classes/debug/com/
+* build/classes/debug/com/fima/
+* build/classes/debug/com/fima/cardsui/
+* build/classes/debug/com/fima/cardsui/BuildConfig.class
+* build/classes/debug/com/fima/cardsui/R$attr.class
+* build/classes/debug/com/fima/cardsui/R$color.class
+* build/classes/debug/com/fima/cardsui/R$dimen.class
+* build/classes/debug/com/fima/cardsui/R$drawable.class
+* build/classes/debug/com/fima/cardsui/R$id.class
+* build/classes/debug/com/fima/cardsui/R$layout.class
+* build/classes/debug/com/fima/cardsui/R$style.class
+* build/classes/debug/com/fima/cardsui/R.class
+* build/classes/debug/com/fima/cardsui/StackAdapter.class
+* build/classes/debug/com/fima/cardsui/SwipeDismissTouchListener$1.class
+* build/classes/debug/com/fima/cardsui/SwipeDismissTouchListener$2.class
+* build/classes/debug/com/fima/cardsui/SwipeDismissTouchListener$3.class
+* build/classes/debug/com/fima/cardsui/SwipeDismissTouchListener$OnDismissCallback.class
+* build/classes/debug/com/fima/cardsui/SwipeDismissTouchListener.class
+* build/classes/debug/com/fima/cardsui/Utils.class
+* build/classes/debug/com/fima/cardsui/objects/
+* build/classes/debug/com/fima/cardsui/objects/AbstractCard.class
+* build/classes/debug/com/fima/cardsui/objects/Card$OnCardSwiped.class
+* build/classes/debug/com/fima/cardsui/objects/Card.class
+* build/classes/debug/com/fima/cardsui/objects/CardFactory.class
+* build/classes/debug/com/fima/cardsui/objects/CardModel.class
+* build/classes/debug/com/fima/cardsui/objects/CardStack$1.class
+* build/classes/debug/com/fima/cardsui/objects/CardStack$2.class
+* build/classes/debug/com/fima/cardsui/objects/CardStack$3.class
+* build/classes/debug/com/fima/cardsui/objects/CardStack.class
+* build/classes/debug/com/fima/cardsui/objects/RecyclableCard.class
+* build/classes/debug/com/fima/cardsui/views/
+* build/classes/debug/com/fima/cardsui/views/CardUI$1.class
+* build/classes/debug/com/fima/cardsui/views/CardUI$2.class
+* build/classes/debug/com/fima/cardsui/views/CardUI$OnRenderedListener.class
+* build/classes/debug/com/fima/cardsui/views/CardUI.class
+* build/classes/debug/com/fima/cardsui/views/QuickReturnListView.class
+* build/classes/release/
+* build/classes/release/com/
+* build/classes/release/com/fima/
+* build/classes/release/com/fima/cardsui/
+* build/classes/release/com/fima/cardsui/BuildConfig.class
+* build/classes/release/com/fima/cardsui/R$attr.class
+* build/classes/release/com/fima/cardsui/R$color.class
+* build/classes/release/com/fima/cardsui/R$dimen.class
+* build/classes/release/com/fima/cardsui/R$drawable.class
+* build/classes/release/com/fima/cardsui/R$id.class
+* build/classes/release/com/fima/cardsui/R$layout.class
+* build/classes/release/com/fima/cardsui/R$style.class
+* build/classes/release/com/fima/cardsui/R.class
+* build/classes/release/com/fima/cardsui/StackAdapter.class
+* build/classes/release/com/fima/cardsui/SwipeDismissTouchListener$1.class
+* build/classes/release/com/fima/cardsui/SwipeDismissTouchListener$2.class
+* build/classes/release/com/fima/cardsui/SwipeDismissTouchListener$3.class
+* build/classes/release/com/fima/cardsui/SwipeDismissTouchListener$OnDismissCallback.class
+* build/classes/release/com/fima/cardsui/SwipeDismissTouchListener.class
+* build/classes/release/com/fima/cardsui/Utils.class
+* build/classes/release/com/fima/cardsui/objects/
+* build/classes/release/com/fima/cardsui/objects/AbstractCard.class
+* build/classes/release/com/fima/cardsui/objects/Card$OnCardSwiped.class
+* build/classes/release/com/fima/cardsui/objects/Card.class
+* build/classes/release/com/fima/cardsui/objects/CardFactory.class
+* build/classes/release/com/fima/cardsui/objects/CardModel.class
+* build/classes/release/com/fima/cardsui/objects/CardStack$1.class
+* build/classes/release/com/fima/cardsui/objects/CardStack$2.class
+* build/classes/release/com/fima/cardsui/objects/CardStack$3.class
+* build/classes/release/com/fima/cardsui/objects/CardStack.class
+* build/classes/release/com/fima/cardsui/objects/RecyclableCard.class
+* build/classes/release/com/fima/cardsui/views/
+* build/classes/release/com/fima/cardsui/views/CardUI$1.class
+* build/classes/release/com/fima/cardsui/views/CardUI$2.class
+* build/classes/release/com/fima/cardsui/views/CardUI$OnRenderedListener.class
+* build/classes/release/com/fima/cardsui/views/CardUI.class
+* build/classes/release/com/fima/cardsui/views/QuickReturnListView.class
+* build/incremental/
+* build/incremental/aidl/
+* build/incremental/aidl/debug/
+* build/incremental/aidl/debug/dependency.store
+* build/incremental/aidl/debug/inputs.data
+* build/incremental/aidl/debug/outputs.data
+* build/incremental/aidl/release/
+* build/incremental/aidl/release/dependency.store
+* build/incremental/aidl/release/inputs.data
+* build/incremental/aidl/release/outputs.data
+* build/incremental/mergeAssets/
+* build/incremental/mergeAssets/debug/
+* build/incremental/mergeAssets/debug/inputs.data
+* build/incremental/mergeAssets/debug/merger.xml
+* build/incremental/mergeAssets/debug/outputs.data
+* build/incremental/mergeAssets/release/
+* build/incremental/mergeAssets/release/inputs.data
+* build/incremental/mergeAssets/release/merger.xml
+* build/incremental/mergeAssets/release/outputs.data
+* build/incremental/mergeResources/
+* build/incremental/mergeResources/debug/
+* build/incremental/mergeResources/debug/inputs.data
+* build/incremental/mergeResources/debug/merger.xml
+* build/incremental/mergeResources/debug/outputs.data
+* build/incremental/mergeResources/release/
+* build/incremental/mergeResources/release/inputs.data
+* build/incremental/mergeResources/release/merger.xml
+* build/incremental/mergeResources/release/outputs.data
+* build/incremental/packageResources/
+* build/incremental/packageResources/debug/
+* build/incremental/packageResources/debug/inputs.data
+* build/incremental/packageResources/debug/merger.xml
+* build/incremental/packageResources/debug/outputs.data
+* build/incremental/packageResources/release/
+* build/incremental/packageResources/release/inputs.data
+* build/incremental/packageResources/release/merger.xml
+* build/incremental/packageResources/release/outputs.data
+* build/libs/
+* build/libs/CardsUILib-debug.aar
+* build/libs/CardsUILib-debug.ap_
+* build/libs/CardsUILib-release.ap_
+* build/libs/CardsUILib.aar
+* build/libs/ProjectName.jar
+* build/res/
+* build/res/all/
+* build/res/all/debug/
+* build/res/all/debug/drawable-xhdpi/
+* build/res/all/debug/drawable-xhdpi/card_background.9.png
+* build/res/all/debug/drawable-xhdpi/card_background_shadow.9.png
+* build/res/all/debug/drawable-xhdpi/card_shadow.9.png
+* build/res/all/debug/drawable-xhdpi/top_shadow.png
+* build/res/all/debug/drawable/
+* build/res/all/debug/drawable/card.xml
+* build/res/all/debug/layout/
+* build/res/all/debug/layout/cards_view.xml
+* build/res/all/debug/layout/cards_view_multicolumn.xml
+* build/res/all/debug/layout/footer_fragment.xml
+* build/res/all/debug/layout/header.xml
+* build/res/all/debug/layout/item_card.xml
+* build/res/all/debug/layout/item_card_empty_first.xml
+* build/res/all/debug/layout/item_card_empty_last.xml
+* build/res/all/debug/layout/item_play_card_empty_first.xml
+* build/res/all/debug/layout/item_stack.xml
+* build/res/all/debug/values/
+* build/res/all/debug/values/values.xml
+* build/res/all/release/
+* build/res/all/release/drawable-xhdpi/
+* build/res/all/release/drawable-xhdpi/card_background.9.png
+* build/res/all/release/drawable-xhdpi/card_background_shadow.9.png
+* build/res/all/release/drawable-xhdpi/card_shadow.9.png
+* build/res/all/release/drawable-xhdpi/top_shadow.png
+* build/res/all/release/drawable/
+* build/res/all/release/drawable/card.xml
+* build/res/all/release/layout/
+* build/res/all/release/layout/cards_view.xml
+* build/res/all/release/layout/cards_view_multicolumn.xml
+* build/res/all/release/layout/footer_fragment.xml
+* build/res/all/release/layout/header.xml
+* build/res/all/release/layout/item_card.xml
+* build/res/all/release/layout/item_card_empty_first.xml
+* build/res/all/release/layout/item_card_empty_last.xml
+* build/res/all/release/layout/item_play_card_empty_first.xml
+* build/res/all/release/layout/item_stack.xml
+* build/res/all/release/values/
+* build/res/all/release/values/values.xml
+* build/source/
+* build/source/buildConfig/
+* build/source/buildConfig/debug/
+* build/source/buildConfig/debug/com/
+* build/source/buildConfig/debug/com/fima/
+* build/source/buildConfig/debug/com/fima/cardsui/
+* build/source/buildConfig/debug/com/fima/cardsui/BuildConfig.java
+* build/source/buildConfig/release/
+* build/source/buildConfig/release/com/
+* build/source/buildConfig/release/com/fima/
+* build/source/buildConfig/release/com/fima/cardsui/
+* build/source/buildConfig/release/com/fima/cardsui/BuildConfig.java
+* build/source/r/
+* build/source/r/debug/
+* build/source/r/debug/com/
+* build/source/r/debug/com/fima/
+* build/source/r/debug/com/fima/cardsui/
+* build/source/r/debug/com/fima/cardsui/R.java
+* build/source/r/release/
+* build/source/r/release/com/
+* build/source/r/release/com/fima/
+* build/source/r/release/com/fima/cardsui/
+* build/source/r/release/com/fima/cardsui/R.java
+* build/tmp/
+* build/tmp/packageDebugJar/
+* build/tmp/packageDebugJar/MANIFEST.MF
+* build/tmp/packageReleaseJar/
+* build/tmp/packageReleaseJar/MANIFEST.MF
+* gradle/
+* gradle/wrapper/
+* gradle/wrapper/gradle-wrapper.jar
+* gradle/wrapper/gradle-wrapper.properties
+* gradlew
+* gradlew.bat
+* proguard-project.txt
+From GSApp3:
+* README.md
+* TODO.txt
+* logs/
+* logs/a-clean.log
+* logs/a-completehtml.log
+* logs/a-gpart.log
+* logs/new-clean.log
+* logs/new-completehtml.log
+* logs/new-gpart.log
+* proguard-project.txt
+
+Replaced Jars with Dependencies:
+--------------------------------
+The importer recognized the following .jar files as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the .jar file in your project was of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the jar replacement in the import wizard and try again:
+
+android-support-v4.jar => com.android.support:support-v4:21.0.3
+android-support-v7-appcompat.jar => com.android.support:appcompat-v7:21.0.3
+
+Replaced Libraries with Dependencies:
+-------------------------------------
+The importer recognized the following library projects as third party
+libraries and replaced them with Gradle dependencies instead. This has
+the advantage that more explicit version information is known, and the
+libraries can be updated automatically. However, it is possible that
+the source files in your project were of an older version than the
+dependency we picked, which could render the project not compileable.
+You can disable the library replacement in the import wizard and try
+again:
+
+android-support-v7-appcompat => [com.android.support:appcompat-v7:21.0.3]
+
+Moved Files:
+------------
+Android Gradle projects use a different directory structure than ADT
+Eclipse projects. Here's how the projects were restructured:
+
+In CardsUILib:
+* AndroidManifest.xml => cardsUILib/src/main/AndroidManifest.xml
+* assets/ => cardsUILib/src/main/assets/
+* libs/nineoldandroids-2.4.0.jar => cardsUILib/libs/nineoldandroids-2.4.0.jar
+* res/ => cardsUILib/src/main/res/
+* src/ => cardsUILib/src/main/java/
+In GSApp3:
+* AndroidManifest.xml => gSApp3/src/main/AndroidManifest.xml
+* assets/ => gSApp3/src/main/assets/
+* libs/acra-4.5.0.jar => gSApp3/libs/acra-4.5.0.jar
+* libs/systembartint-1.0.2.jar => gSApp3/libs/systembartint-1.0.2.jar
+* lint.xml => gSApp3/lint.xml
+* res/ => gSApp3/src/main/res/
+* src/ => gSApp3/src/main/java/
+
+Next Steps:
+-----------
+You can now build the project. The Gradle project needs network
+connectivity to download dependencies.
+
+Bugs:
+-----
+If for some reason your project does not build, and you determine that
+it is due to a bug or limitation of the Eclipse to Gradle importer,
+please file a bug at http://b.android.com with category
+Component-Tools.
+
+(This import summary is for your information only, and can be deleted
+after import once you are satisfied with the results.)

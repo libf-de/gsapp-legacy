@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <PreferenceCategory 
+        android:title="Klasse Category"
+        android:key="klasse_category">
+
+        <EditTextPreference
+            android:key="klasse"    
+            android:defaultValue="" />
+        
+        <EditTextPreference
+            android:key="ruf"
+            android:defaultValue="dial" />
+            
+            
+        <EditTextPreference
+            android:key="fit"    
+            android:defaultValue="" />
+    </PreferenceCategory>
+</PreferenceScreen>

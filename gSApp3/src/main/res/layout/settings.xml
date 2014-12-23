@@ -1,0 +1,226 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:id="@+id/withersSCR" >
+        
+    <RelativeLayout
+        android:id="@+id/withers"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" >
+
+        <TextView
+            android:id="@+id/SettingsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="?pageMargin"
+            android:text="Einstellungen"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/KlasseLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SettingsLabel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Klasse"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <Spinner
+            android:id="@+id/klasseEinst"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/KlasseLabel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp" />
+
+        <TextView
+            android:id="@+id/CallsLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/klasseEinst"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Anrufe"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <RadioButton
+            android:id="@+id/radioButton1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/CallsLabel"
+            android:layout_centerHorizontal="true"
+            android:text="Direkt" />
+
+        <RadioButton
+            android:id="@+id/radioButton2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioButton1"
+            android:layout_centerHorizontal="true"
+            android:text="Nummer eingeben" />
+
+        <Button
+            android:id="@+id/SendeNachricht"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/StoreButton"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/StoreButton"
+            android:text="Fehler melden\n/ Feedback" />
+        
+        <TextView
+            android:id="@+id/KSpacer"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="\n\n"
+            android:layout_below="@id/StoreButton" />
+            
+
+        <TextView
+            android:id="@+id/AnzeigeLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/radioButton2"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Größe der Inhalte"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/SkinLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ZoomBar"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="20dp"
+            android:text="Oberfläche"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+
+        <CheckBox
+            android:id="@+id/UseTabletUI"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/SkinLabel"
+            android:layout_centerHorizontal="true"
+            android:enabled="false"
+            android:text="Tablet-Oberfläche verwenden" />
+
+        <CheckBox
+            android:id="@+id/UseBlack"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UseTabletUI"
+            android:layout_centerHorizontal="true"
+            android:text="Dunkles Design verwenden" />
+
+        <TextView
+            android:id="@+id/ExpLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UseBlack"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="15dp"
+            android:text="Weitere Einstellungen"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:textStyle="bold" />
+        
+        <CheckBox
+            android:id="@+id/vpAsync"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/ExpLabel"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Asynchron laden (lang tippen für Hilfe)" />
+        
+        <CheckBox
+            android:id="@+id/UseCheck"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vpAsync"
+            android:layout_centerHorizontal="true"
+            android:layout_marginTop="10dp"
+            android:text="Im Hintergrund nach neuem\nVertretungsplan suchen" />
+        
+        <Button 
+            android:id="@+id/AutologinConfig"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/UseCheck"
+            android:layout_centerHorizontal="true" 
+            android:layout_marginTop="10dp"
+            android:text="Autom. Anmeldung (Essensbest.)"/>
+        
+        <SeekBar
+            android:id="@+id/ZoomBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/AnzeigeLabel"
+            android:layout_toLeftOf="@+id/größerLabel"
+            android:layout_toRightOf="@+id/kleinerLabel"
+            android:max="200"
+            android:progress="100" />
+
+        <TextView
+            android:id="@+id/größerLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ZoomBar"
+            android:layout_alignParentRight="true"
+            android:layout_alignTop="@+id/ZoomBar"
+            android:gravity="center"
+            android:text="Größer"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+        
+        <TextView
+            android:id="@+id/kleinerLabel"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/ZoomBar"
+            android:layout_alignParentLeft="true"
+            android:layout_alignTop="@+id/ZoomBar"
+            android:gravity="center"
+            android:text="Kleiner"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+
+        <CheckBox
+            android:id="@+id/ZoomOnOff"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/AnzeigeLabel"
+            android:layout_alignTop="@+id/AnzeigeLabel"
+            android:layout_toLeftOf="@+id/AnzeigeLabel"
+            android:text="" />
+
+        <Button
+            android:id="@+id/removeTablet"
+            style="?android:attr/buttonStyleSmall"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentLeft="true"
+            android:layout_alignParentTop="true"
+            android:text="Tabletmodus ausschalten"
+            android:visibility="invisible" />
+
+        <Button
+            android:id="@+id/StoreButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_below="@+id/AutologinConfig"
+            android:layout_marginTop="18dp"
+            android:text="App im PlayStore\nanzeigen" />
+
+    </RelativeLayout>
+    
+ </ScrollView>

@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        jar="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/libs/internal_impl-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="01ec05bfbafcc07646ba813000bf2ef11742dd03">
+        <dex dex="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/debug/internal_impl-21.0.3-fd78d2b537cd5baeb17d70e1204663c8ab824826.jar" />
+    </item>
+    <item
+        jar="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/exploded-aar/GSApp3/cardsUILib/unspecified/libs/nineoldandroids-2.4.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="59f19e43354d32de831379c23ce03bb259a4c2b7">
+        <dex dex="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/debug/nineoldandroids-2.4.0-67ab96e25cb94676b21b66b84303a62a94115f46.jar" />
+    </item>
+    <item
+        jar="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/exploded-aar/com.android.support/support-v4/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2c91c949a45a21cdecf26e03951e46c7beec9ad8">
+        <dex dex="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/debug/classes-66a9a8f017d2cb8bfcf12f710ce225f2c8449368.jar" />
+    </item>
+    <item
+        jar="/home/xorg/src/android-sdk-linux/extras/android/m2repository/com/android/support/support-annotations/21.0.3/support-annotations-21.0.3.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="4b74cefe1f0c1b819e7260c8627a14674e37fd35">
+        <dex dex="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/debug/support-annotations-21.0.3-2599a089642802428dda2bdcdb1829b4b43d2072.jar" />
+    </item>
+    <item
+        jar="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/libs/acra-4.5.0.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="44a5eb946e0d83eed4a0128d877ca1fd8168b83a">
+        <dex dex="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/debug/acra-4.5.0-df8b4eb0d97e161f69037e61f1ba2d655f2985c5.jar" />
+    </item>
+    <item
+        jar="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/libs/systembartint-1.0.2.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="2fd791481740a81f39cb5f3b6923e2045f307700">
+        <dex dex="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/debug/systembartint-1.0.2-081c60862bdfa43995fa842776917405350f71ba.jar" />
+    </item>
+    <item
+        jar="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/exploded-aar/com.android.support/appcompat-v7/21.0.3/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="81d42bf983a8741f4888a6e333e454e4a5e0eeb7">
+        <dex dex="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/debug/classes-5a813cb58c21390d804b4b84cb359c5ca99f7b89.jar" />
+    </item>
+    <item
+        jar="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/exploded-aar/GSApp3/cardsUILib/unspecified/classes.jar"
+        jumboMode="false"
+        revision="21.1.2"
+        sha1="6e626ca55245bb296a03e02bf46a74848355a279">
+        <dex dex="/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/debug/classes-d105eeae06fe63faed3397006a893bc7fcbf3b5c.jar" />
+    </item>
+
+</items>

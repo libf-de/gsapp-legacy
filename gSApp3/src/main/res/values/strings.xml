@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">GSApp</string>
+    <string name="action_settings">Einstellungen</string>
+    <string name="VPlan">Vertretungsplan</string>
+    <string name="aktualisiere">Aktualisieren</string>
+    <string name="Termin">Termine</string>
+    <string name="Aktuell">Aktuelles</string>
+    <string name="About">Über…</string>
+    <string name="Settings">Einstellungen</string>
+    <string name="Kontakt">Kontakt</string>
+    <string name="Sgspp">GSApp</string>
+    <string name="Shpurl">http://thexorg.tk/</string>
+    <string name="version">4.4 "Gino"</string>
+    <string name="build">Release 5</string>
+    <string name="codedby">Written by Xorg (Fabian S.)</string>
+    <string name="woche">Diese/nächste Woche</string>
+    <string name="crash_toast_text">Sorry, GSApp wurde unerwartet beendet. Bitte sende einen Bugreport an den Entwicker</string>
+    <string name="crash_dialog_title">GSApp "Gino" SEGVd</string>
+    <string name="crash_dialog_text">Ein unerwarteter Fehler hat zum Absturz von GSApp geführt. Bitte sende einen Fehlerbericht an den Entwicker, um beim Beheben des Fehlers zu helfen.</string>
+    <string name="crash_dialog_comment_prompt">Fügen sie hier Kommentare zu ihrem Problem hinzu:</string>
+    <string name="crash_dialog_ok_toast">Danke, das sie beim Entwickeln helfen!</string>
+    <string name="title_item_list">Items</string>
+    <string name="title_item_detail">Item Detail</string>
+    <string name="title_activity_tutorial">Anleitung</string>
+    <string name="hello_world">Hello world!</string>
+
+</resources>
