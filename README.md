@@ -12,4 +12,10 @@ Kompilieren
 Dieser Branch
 ==============
 
-Dieser Branch enthält die neuste Revision der Version 4 (Codename "Gino")
+Dieser Branch enthält Version 4.5 (6. Build, Codename "Gino", Hauptversion 4)
+
+
+Changelog
+==========
+
+[BUGFIX] Klassen 5.5, 6.5 und 7.5 hinzugefügt
