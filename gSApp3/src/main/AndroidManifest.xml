@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="de.xorg.gsapp"
-    android:versionCode="440"
-    android:versionName="4.4 Gino" >
+    android:versionCode="450"
+    android:versionName="4.5 Gino" >
 
     <uses-sdk
         android:minSdkVersion="8" />

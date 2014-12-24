@@ -12,8 +12,8 @@
     <string name="Kontakt">Kontakt</string>
     <string name="Sgspp">GSApp</string>
     <string name="Shpurl">http://thexorg.tk/</string>
-    <string name="version">4.4 "Gino"</string>
-    <string name="build">Release 5</string>
+    <string name="version">4.5 "Gino"</string>
+    <string name="build">Release 6</string>
     <string name="codedby">Written by Xorg (Fabian S.)</string>
     <string name="woche">Diese/nächste Woche</string>
     <string name="crash_toast_text">Sorry, GSApp wurde unerwartet beendet. Bitte sende einen Bugreport an den Entwicker</string>
