@@ -12,4 +12,4 @@ Kompilieren
 Dieser Branch
 ==============
 
-Dieser Branch enthält die neuste Revision der Version 4 (Codename "Gino")
+Dieser Branch enthält die Pre-Alpha Version "The Bleeding Edge"

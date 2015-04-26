@@ -21,6 +21,7 @@ import android.content.Intent;
 import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.Menu;
@@ -43,7 +44,7 @@ resDialogTitle = R.string.crash_dialog_title, // optional. default is your appli
 resDialogCommentPrompt = R.string.crash_dialog_comment_prompt, // optional. when defined, adds a user text field input with this text resource as a label
 resDialogOkToast = R.string.crash_dialog_ok_toast // optional. displays a Toast message when the user accepts to send a report.
 )
-public class MainActivity extends Activity {
+public class MainActivity extends ActionBarActivity {
 	public final static String EXTRA_URL = "de.xorg.gsapp.MESSAGE";
 	public final static String EXTRA_NAME = "de.xorg.gsapp.MESSAGENAME";
 
@@ -60,30 +61,18 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
 		//App-Thema einstellen
 		Boolean BeanUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("bean", false);
-		if(BeanUI) {
-			setTheme(R.style.AppThemeBlack);
-		} else {
-			setTheme(R.style.AppTheme);
-		}
+        Util.setThemeUI(this);
 		setContentView(R.layout.activity_main);
 
         l = new GALog(this);
-		
-		// Transparenz für KitKat
-		Util.setTranscluent(this, BeanUI);
 	
 		IBLAH = this;
 		
 		//Tablet-Oberfläche einstellen
-		Boolean TabletUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("tablet", false);
-		if(TabletUI) {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		} else {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		}
+        Util.setOrientation(this);
 
         if(BeanUI) {
             ImageView p = (ImageView) findViewById(R.id.imageView1);
@@ -105,7 +94,7 @@ public class MainActivity extends Activity {
 		 
 		Boolean isInternetPresent = cd.isConnectingToInternet();
 		
-		if(android.os.Build.BOARD.equalsIgnoreCase("mako") || android.os.Build.BOARD.equalsIgnoreCase("gt-i8150") || android.os.Build.BOARD.equalsIgnoreCase("msm8226")) {
+		if(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("devMode", false)) {
 			isNexus = true;
 		} else {
 			isNexus = false;
@@ -136,18 +125,6 @@ public class MainActivity extends Activity {
 		    } else {
 		    	if(!(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("anl", false))) {
 			    	ZeigeANLEITUNG();
-			    } else {					
-			    	if(android.os.Build.VERSION.SDK_INT < android.os.Build.VERSION_CODES.HONEYCOMB) {
-				    	if(!(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("gb", false))) {
-					    	ZeigeAndroidGingerbread();
-					    }
-				    }
-				    
-				    if(android.os.Build.VERSION.SDK_INT >= android.os.Build.VERSION_CODES.KITKAT) {
-				    	if(!(PreferenceManager.getDefaultSharedPreferences(this).getBoolean("kk", false))) {
-					    	ZeigeAndroidKitkat();
-					    }
-				    }
 			    }
 		    }
 		}
@@ -235,8 +212,12 @@ public class MainActivity extends Activity {
 		    	 return true;
 		    case R.id.action_fcheck:
 		    	 ForceOT();
-		    	 Toast.makeText(this, "Forcing check..", Toast.LENGTH_SHORT).show();
+		    	 Toast.makeText(this, "Erzwinge Überprüfung..", Toast.LENGTH_SHORT).show();
 		    	 return true;
+            case R.id.action_devsetting:
+                 Intent intentes = new Intent(this, DeveloperSettings.class);
+                 startActivity(intentes);
+                 return true;
 		    default:
 		         return super.onOptionsItemSelected(item);
 		    }
@@ -571,6 +552,11 @@ public class MainActivity extends Activity {
 		Intent intent = new Intent(this, About.class);
 	    startActivity(intent);
 	}
+
+    public void crashTester(View view) {
+        Integer i = null;
+        i.byteValue();
+    }
 	
 	public void shareAPP() {
 		Intent sendIntent = new Intent();

@@ -21,6 +21,7 @@ public class GALog {
 
     GALog(Context c) {
         ct = c;
+        DEBUG = PreferenceManager.getDefaultSharedPreferences(c).getBoolean("debug", false);
         File debug = new File("/sdcard/galog.log");
         if(!debug.exists()) {
             try {

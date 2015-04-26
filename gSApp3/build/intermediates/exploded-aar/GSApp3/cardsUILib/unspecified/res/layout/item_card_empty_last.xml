@@ -5,4 +5,4 @@
     android:layout_height="match_parent"
     android:background="@drawable/card_background_shadow" >
 
-</FrameLayout><!-- From: file:/home/xorg/src/AndroidstudioProjects/GSApp3/cardsUILib/src/main/res/layout/item_card_empty_last.xml -->
+</FrameLayout><!-- From: file:/home/xorg/Android/AndroidstudioProjects/GSApp3/cardsUILib/src/main/res/layout/item_card_empty_last.xml -->

@@ -82,7 +82,7 @@ public class CheckService extends BroadcastReceiver {
 	        
 	        isRunning = true;
 	        
-	        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * 1800 , pi);
+	        am.setRepeating(AlarmManager.RTC_WAKEUP, System.currentTimeMillis(), 1000 * PreferenceManager.getDefaultSharedPreferences(context).getInt("checkInt", 1800) , pi);
 	    }
 	 
 	    // Service abbrechen
@@ -187,6 +187,58 @@ public class CheckService extends BroadcastReceiver {
 			
 			return me;
 		}
+
+    public static boolean checkClass(String pageBody, String inputKlasse) {
+        char gf = (char) 34;
+        GALog loc = new GALog(CheckService.MC);
+
+        boolean found = false;
+
+        if(inputKlasse.equals("")) {
+            return true;
+        }
+
+        if(pageBody != "E") {
+            String gPart = pageBody.split("<tr id=\"Svertretungen\">")[1];
+            String[] rawC = gPart.split("\n");
+            String[] newC = clearUp(rawC).split("\n");
+            int counter = 1;
+            String klasse = "";
+
+            for(String cnt : newC) {
+                if(counter == 1) {
+                    klasse = cnt;
+                    counter = counter + 1;
+                } else if(counter == 2) {
+                    counter = counter + 1;
+                } else if(counter == 3) {
+                    counter = counter + 1;
+                } else if(counter == 4) {
+                    counter = counter + 1;
+                } else if(counter == 5) {
+                    counter = counter + 1;
+                } else if(counter == 6) {
+                    counter = counter + 1;
+                } else if(counter == 7) {
+                    counter = 1;
+                    String skl = String.valueOf(klasse.charAt(0));
+                    String SUCL = klasse.replace("/2", " " + skl + ".2");
+                    SUCL = SUCL.replace("/3", " " + skl + ".3");
+                    SUCL = SUCL.replace("/4", " " + skl + ".4");
+                    SUCL = SUCL.replace("/5", " " + skl + ".5");
+
+                    if(SUCL.contains(inputKlasse)) {
+                        found = true;
+                        break;
+                    }
+                }
+            }
+
+            return found;
+        } else {
+            return true;
+        }
+    }
 	    
 	    public static String parsePage(String pageBody) {
 	    	char gf = (char) 34;
@@ -196,11 +248,11 @@ public class CheckService extends BroadcastReceiver {
 			
 			String outpString = "";
 
-            loc.debug("CheckService/Parse/PageDebug: +" + pageBody.replace("\n", "*BR*") + "+");
+            //loc.debug("CheckService/Parse/PageDebug: +" + pageBody.replace("\n", "*BR*") + "+");
 			
 			if(pageBody != "E") {
 				String gPart = pageBody.split("<tr id=\"Svertretungen\">")[1];
-                loc.debug("CheckService/Parse/PartDebug: +" + gPart.replace("\n", "*BR") + "+");
+                //loc.debug("CheckService/Parse/PartDebug: +" + gPart.replace("\n", "*BR") + "+");
 				
 				String[] rawC = gPart.split("\n");
 				
@@ -284,11 +336,15 @@ public class CheckService extends BroadcastReceiver {
             ed.commit();
         }
 	    
-	    //Gespeicherte Klasse auslesen (unbenutzt)
+	    //Gespeicherte Klasse auslesen
 	    public static String getKlasse() {
 	    	String CLASS = PreferenceManager.getDefaultSharedPreferences(CheckService.MC).getString("klasse", "");
 	    	return CLASS;
 	    }
+
+        public static int getMode() {
+            return PreferenceManager.getDefaultSharedPreferences(CheckService.MC).getInt("check", 0);
+        }
 	    
 	    //Methode um WakeLock zu entfernen
 	    public static void RemoveWakelock() {
@@ -378,7 +434,16 @@ class GetDate extends AsyncTask<String, Void, String> {
 				if(newDate > rideDate) {
 					//Verfügbarer Vertretungsplan ist neuer als zuletzt angesehener
                     loc.debug("CheckService/GetDate: Neuer Plan verfügbar");
-					CheckService.PostNotification("Es ist ein neuer Vertretungsplan verfügbar!", String.valueOf(newDate), result);
+                    SharedPreferences.Editor editor = PreferenceManager.getDefaultSharedPreferences(CheckService.MC).edit();
+                    editor.putString("readDate", GRC);
+                    editor.commit();
+                    if(CheckService.getMode() == 1) {
+                        if(CheckService.checkClass(result, CheckService.getKlasse())) {
+                            CheckService.PostNotification("Du hast morgen Vertretung!", String.valueOf(newDate), result);
+                        }
+                    } else {
+                        CheckService.PostNotification("Es ist ein neuer Vertretungsplan verfügbar!", String.valueOf(newDate), result);
+                    }
                     loc.debug("CheckService/GetDate: Neuer Plan verfügbar-POST NTF");
 				} else {
 					loc.debug("CheckService/GetDate: Kein neuer Plan verfügbar");

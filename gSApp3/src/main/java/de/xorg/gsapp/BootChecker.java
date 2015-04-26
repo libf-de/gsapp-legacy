@@ -21,8 +21,8 @@ public class BootChecker extends BroadcastReceiver {
         	l = new GALog(context);
 
         	//Check aktiviert?
-        	Boolean VPChecker = PreferenceManager.getDefaultSharedPreferences(context).getBoolean("rideCheck", false);
-    		if(VPChecker) {
+        	int Mode = getMode(context);
+    		if(!(Mode == 0)) {
     			//Ja, Check aktiviert
     		     if(alarm != null){
     		        alarm.SetAlarm(context);
@@ -36,5 +36,9 @@ public class BootChecker extends BroadcastReceiver {
     			l.debug("Not starting service - disabled by user");
     		}
         }
+    }
+
+    public static int getMode(Context c) {
+        return PreferenceManager.getDefaultSharedPreferences(c).getInt("check", 0);
     }
 }

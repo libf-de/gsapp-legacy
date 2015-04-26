@@ -35,14 +35,19 @@ import android.content.SharedPreferences.Editor;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
 import android.os.AsyncTask;
+import android.os.Build;
 import android.os.Bundle;
+import android.os.StrictMode;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
+import android.view.ViewConfiguration;
 import android.view.Window;
+import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.webkit.WebChromeClient;
@@ -54,7 +59,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 import de.xorg.gsapp.R;
 
-public class VPlanViewer extends Activity {
+public class VPlanViewer extends ActionBarActivity {
 	public final static String EXTRA_URL = "de.xorg.gsapp.MESSAGE";
 	
 	@SuppressWarnings("unused")
@@ -64,22 +69,23 @@ public class VPlanViewer extends Activity {
 	private boolean singleMode = false;
 	private CardUI mCardView;
 	private boolean isDarkUI = false;
+    public boolean fallback = false;
 	private String dateD = "unbekannt";
-	private String hinweisD = "kein";
+	private String hinweisD = "kein Hinweis";
 	
 	public String cDeutsch = "#013ADF";
 	public String cMathe = "#FF0000";
 	public String cMusik = "#BDBDBD";
 	public String cKunst = "#9A2EFE";
 	public String cGeografie = "#0B610B";
-	public String cReligion = "#F7FE2E";
-	public String cEthik = "#F7FE2E";
+	public String cReligion = "#f37a4b";
+	public String cEthik = "#f37a4b";
 	public String cMNT = "#01DF01";
 	public String cEnglisch = "#DF7401";
 	public String cSport = "#000000";
 	public String cBiologie = "#01DF01";
 	public String cChemie = "#FF00FF";
-	public String cPhysik = "#00FFFF";
+	public String cPhysik = "#00B2B2";
 	public String cSozialkunde = "#8A4B08";
 	public String cInformatik = "#BDBDBD";
 	public String cWirtschaftRecht = "#610B0B";
@@ -96,23 +102,13 @@ public class VPlanViewer extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.getWindow().requestFeature(Window.FEATURE_PROGRESS);
-		
 		Boolean BeanUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("bean", false);
-		if(BeanUI) {
-			setTheme(R.style.AppThemeSBlack);
-		} else {
-		    setTheme(R.style.AppTheme);
-		}
+        Util.setThemeUI(this);
+        getWindow().addFlags(WindowManager.LayoutParams.FLAG_DRAWS_SYSTEM_BAR_BACKGROUNDS);
 		setContentView(R.layout.cards);
 		
 		//Tablet-Oberfläche einstellen
-		Boolean TabletUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("tablet", false);
-		if(TabletUI) {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE);
-		} else {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		}
+        Util.setOrientation(this);
 		
 		final Animation anim = AnimationUtils.loadAnimation(this, R.anim.slide);
 		//isDarkUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("bean", false);
@@ -123,8 +119,8 @@ public class VPlanViewer extends Activity {
 		
 		vplane = new Eintrage();
 		
-		Util.setTranscluent(this, BeanUI);
-		
+		//Util.setTranscluent(this, BeanUI);
+
 		magic();
 		
 	}
@@ -180,147 +176,171 @@ public class VPlanViewer extends Activity {
 		String result = "";
 		try {
             /*Apache HttpClient Library*/
-			HttpClient client = new DefaultHttpClient();
-			HttpGet request = new HttpGet("http://www.gymnasium-sonneberg.de/Informationen/vp.html");
-			//HttpGet request = new HttpGet("http://cmp.pixelserver.ga/vp.html");
-			request.setHeader("Accept-Charset", "utf-8");
-			HttpResponse response = client.execute(request);
+            HttpClient client = new DefaultHttpClient();
+            HttpGet request = new HttpGet(getURL());
+            //HttpGet request = new HttpGet("http://gsapp.xorg.ga/debug/vp.html");
+            if (android.os.Build.VERSION.SDK_INT > 9) {
+                StrictMode.ThreadPolicy policy = new StrictMode.ThreadPolicy.Builder().permitAll().build();
+                StrictMode.setThreadPolicy(policy);
+            }
+            request.setHeader("Accept-Charset", "utf-8");
+            request.setHeader("User-Agent", Util.getUserAgentString(this, true));
+            HttpResponse response = client.execute(request);
 			/* response code*/
-			BufferedReader rd = new BufferedReader(
-			new InputStreamReader(response.getEntity().getContent()));
+            BufferedReader rd = new BufferedReader(
+                    new InputStreamReader(response.getEntity().getContent()));
             String line = "";
             while ((line = rd.readLine()) != null) {
-            	result = result + line + "\n";
+                result = result + line + "\n";
             }
             char gf = (char) 34;
-			String Klasse = PreferenceManager.getDefaultSharedPreferences(VPlanViewer.this).getString("klasse", "");
-			
-			try {
-				if(result != "E") {
-					String gPart = result.split("<td colspan=\"7\" class=\"vpUeberschr\">")[1].split("</td>")[0].replace("        ", "");
-					dateD = gPart;
-					String bemerkung = result.split("<tr \"id=Shinweis\">")[1].split("</tr>")[0].replaceAll("\\<.*?>","").replace("&uuml;", "ü").replace("&Uuml;", "Ü").replace("&auml;", "ä").replace("&Auml;", "Ä").replace("&ouml;", "ö").replace("&Ouml;", "Ö").replace("&szlig;", "ß").replaceAll("[\\\r\\\n]+","").trim();
-					hinweisD = bemerkung;
-					//dateD = dateD + "\n" + bemerkung;
-				}
-			} catch(Exception ex) {
-				//Allgemeiner Fehler beim Auswerten
-				Log.d("GSApp Vertretungsplan-Check", "Fehler beim Auswerten der Informationen");
-			}
-			
-			//GDebug.doLogWrite(result, "a-completehtml");
-			
-			if(result != "E") {
-				String gPart = result.split("<tr id=\"Svertretungen\">\n")[1];
-				
-				//GDebug.doLogWrite(gPart, "a-gpart");
-				
-				String[] rawC = gPart.split("\n");
-				
-				String cleaned = clearUp(rawC);
-				
-				//GDebug.doLogWrite(cleaned, "a-clean");
-				
-				String[] newC = cleaned.split("\n");
-				
-				int counter = 1;
-				int va = 0;
-				String klasse = "";
-				String stunde = "";
-				String orgfach = "";
-				String vertret = "";
-				String raum = "";
-				String verfach = "";
-				String bemerkung = "";
-				
-				for(String cnt : newC) {
-					if(counter == 1) {
-						klasse = cnt;
-						counter = counter + 1;
-					} else if(counter == 2) {
-						stunde = cnt;
-						counter = counter + 1;
-					} else if(counter == 3) {
-						orgfach = cnt;
-						counter = counter + 1;
-					} else if(counter == 4) {
-						vertret = cnt;
-						counter = counter + 1;
-					} else if(counter == 5) {
-						raum = cnt;
-						counter = counter + 1;
-					} else if(counter == 6) {
-						verfach = cnt;
-						counter = counter + 1;
-					} else if(counter == 7) {
-						bemerkung = cnt;
-						counter = 1;
-						if(!hinweisD.equals("Hinweis:")) {
-							MyPlayCard card = new MyPlayCard("Hinweis:", hinweisD.replace("Hinweis:", "").replaceAll("[\\\r\\\n]+","").trim(), "#00FF00", "#00FF00", true, false, isDarkUI);
-							card.setOnClickListener(new OnClickListener() {
+            String Klasse = PreferenceManager.getDefaultSharedPreferences(VPlanViewer.this).getString("klasse", "");
 
-								@Override
-								public void onClick(View v) {
-									// TODO Auto-generated method stub
-									AlertDialog ad = new AlertDialog.Builder(VPlanViewer.this).create();  
-								    ad.setCancelable(true); // This blocks the 'BACK' button  
-								    ad.setTitle("Hinweis");
-								    ad.setMessage(hinweisD);
-								      
-								    ad.setButton("OK", new DialogInterface.OnClickListener() {  
-								        @Override  
-								        public void onClick(DialogInterface dialog, int which) {  
-								            dialog.dismiss();                      
-								        }  
-								    });  
-								    ad.show();  
-								}
-								
-							});
-							mCardView.addCard(card);
-						}
-						if(Klasse.equals("")) {
-							isFiltered = false;
-							displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
-							va = va + 1;
-							klasse = "";
-							stunde = "";
-							orgfach = "";
-							vertret = "";
-							raum = "";
-							verfach = "";
-							bemerkung = "";
-						} else {
-							isFiltered = true;
-							Filter = Klasse;
-							String skl = String.valueOf(klasse.charAt(0));
-							String SUCL = klasse.replace("/2", " " + skl + ".2");
-							SUCL = SUCL.replace("/3", " " + skl + ".3");
-							SUCL = SUCL.replace("/4", " " + skl + ".4");
-							SUCL = SUCL.replace("/5", " " + skl + ".5");
-							
-							if(SUCL.contains(Klasse)) {
-								displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
-								va = va + 1;
-							}
-						}
-					}
-				}
-				System.out.println("--- PARSE END AT " + System.currentTimeMillis() + " ---");
-				displayAll();
-				System.out.println("--- DISPLAY END AT " + System.currentTimeMillis() + " ---");
-			} else {
-				mkMsg("Space error :(");
-			}
+            try {
+                if (result != "E") {
+                    String gPart = result.split("<td colspan=\"7\" class=\"vpUeberschr\">")[1].split("</td>")[0].replace("        ", "");
+                    dateD = gPart;
+                    String bemerkung = result.split("<tr id=\"Shinweis\">")[1].split("</tr>")[0].replace("Hinweis: <br />","").replace("<br />", "· ").replaceAll("\\<.*?>", "").replace("&uuml;", "ü").replace("&Uuml;", "Ü").replace("&auml;", "ä").replace("&Auml;", "Ä").replace("&ouml;", "ö").replace("&Ouml;", "Ö").replace("&szlig;", "ß").replaceAll("[\\\r\\\n]+", "").trim();
+                    hinweisD = bemerkung;
+                    //dateD = dateD + "\n" + bemerkung;
+                }
+            } catch (Exception ex) {
+                //Allgemeiner Fehler beim Auswerten
+
+
+                Log.d("GSApp VPC", "Fehler beim Auswerten der Informationen");
+            }
+
+            //GDebug.doLogWrite(result, "a-completehtml");
+
+            if (result != "E") {
+                String gPart = result.split("<tr id=\"Svertretungen\">\n")[1];
+
+                //GDebug.doLogWrite(gPart, "a-gpart");
+
+                String[] rawC = gPart.split("\n");
+
+                String cleaned = clearUp(rawC);
+
+                //GDebug.doLogWrite(cleaned, "a-clean");
+
+                String[] newC = cleaned.split("\n");
+
+                int counter = 1;
+                int va = 0;
+                String klasse = "";
+                String stunde = "";
+                String orgfach = "";
+                String vertret = "";
+                String raum = "";
+                String verfach = "";
+                String bemerkung = "";
+
+                for (String cnt : newC) {
+                    if (counter == 1) {
+                        klasse = cnt;
+                        counter = counter + 1;
+                    } else if (counter == 2) {
+                        stunde = cnt;
+                        counter = counter + 1;
+                    } else if (counter == 3) {
+                        orgfach = cnt;
+                        counter = counter + 1;
+                    } else if (counter == 4) {
+                        vertret = cnt;
+                        counter = counter + 1;
+                    } else if (counter == 5) {
+                        raum = cnt;
+                        counter = counter + 1;
+                    } else if (counter == 6) {
+                        verfach = cnt;
+                        counter = counter + 1;
+                    } else if (counter == 7) {
+                        bemerkung = cnt;
+                        counter = 1;
+                        if (!hinweisD.equals("Hinweis:")) {
+                            MyPlayCard card = new MyPlayCard("Hinweis:", hinweisD.replace("Hinweis:", "").replaceAll("[\\\r\\\n]+", "").trim(), "#00FF00", "#00FF00", true, false, isDarkUI);
+                            card.setOnClickListener(new OnClickListener() {
+
+                                @Override
+                                public void onClick(View v) {
+                                    // TODO Auto-generated method stub
+                                    AlertDialog ad = new AlertDialog.Builder(VPlanViewer.this).create();
+                                    ad.setCancelable(true); // This blocks the 'BACK' button
+                                    ad.setTitle("Hinweis");
+                                    ad.setMessage(hinweisD);
+
+                                    ad.setButton("OK", new DialogInterface.OnClickListener() {
+                                        @Override
+                                        public void onClick(DialogInterface dialog, int which) {
+                                            dialog.dismiss();
+                                        }
+                                    });
+                                    ad.show();
+                                }
+
+                            });
+                            mCardView.addCard(card);
+                        }
+                        if (Klasse.equals("")) {
+                            isFiltered = false;
+                            displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                            va = va + 1;
+                            klasse = "";
+                            stunde = "";
+                            orgfach = "";
+                            vertret = "";
+                            raum = "";
+                            verfach = "";
+                            bemerkung = "";
+                        } else {
+                            isFiltered = true;
+                            Filter = Klasse;
+                            String skl = String.valueOf(klasse.charAt(0));
+                            String SUCL = klasse.replace("/2", " " + skl + ".2");
+                            SUCL = SUCL.replace("/3", " " + skl + ".3");
+                            SUCL = SUCL.replace("/4", " " + skl + ".4");
+                            SUCL = SUCL.replace("/5", " " + skl + ".5");
+
+                            if(SUCL.length() == 1) {
+                                if(Klasse.startsWith(SUCL)) {
+                                    displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                                    va = va + 1;
+                                }
+                            } else {
+                                if (SUCL.contains(Klasse)) {
+                                    displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                                    va = va + 1;
+                                }
+                            }
+                        }
+                    }
+                }
+                System.out.println("--- PARSE END AT " + System.currentTimeMillis() + " ---");
+                displayAll();
+                System.out.println("--- DISPLAY END AT " + System.currentTimeMillis() + " ---");
+            } else {
+                mkMsg("Space error :(");
+            }
+        } catch (ArrayIndexOutOfBoundsException e) {
+            fallbackLoad(result);
 		} catch (Exception exe) {
+            mCardView.clearCards();
+            MyPlayCard card = new MyPlayCard("Interner Fehler", "Es ist ein Fehler beim Herunterladen des Vertretungsplans aufgetreten!", "#FF0000", "#FF0000", true, false, isDarkUI);
+            mCardView.addCard(card);
+
+            Toast.makeText(VPlanViewer.this, "Vertretungsplan konnte nicht angezeigt werden, zeige im Browser..", Toast.LENGTH_SHORT).show();
+
+            Intent intent = new Intent(VPlanViewer.this, InternetViewer.class);
+            intent.putExtra("de.xorg.gsapp.MESSAGE", "http://www.gymnasium-sonneberg.de/Informationen/vp.html");
+            intent.putExtra("de.xorg.gsapp.MESSAGENAME", "[!] Vertretungsplan [!]");
+            VPlanViewer.this.startActivity(intent);
 			exe.printStackTrace();
         }
 	}
 	
 	private class GetVPL extends AsyncTask<String, Void, String> {
-		GetVPL(){
-		    Log.d("GSApp-Gino", "Lade Vertretungsplan");
-		}
+		GetVPL(){ Log.d("GSApp-Gino", "Lade Vertretungsplan"); }
 		
 		@Override  
         protected void onPreExecute()  
@@ -331,7 +351,7 @@ public class VPlanViewer extends Activity {
             //Set the progress dialog to display a horizontal progress bar  
             progressDialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);  
             //Set the dialog title to 'Loading...'  
-            progressDialog.setTitle("GSApp 4.0 »Gino«");  
+            progressDialog.setTitle("GSApp 4.x »Gino«");
             //Set the dialog message to 'Loading application View, please wait...'  
             progressDialog.setMessage("Lade Daten...");  
             //This dialog can't be canceled by pressing the back key  
@@ -351,7 +371,9 @@ public class VPlanViewer extends Activity {
 			 String result = "";
 			 try {
 			 httpclient = new DefaultHttpClient();
-			 request = new HttpGet("http://www.gymnasium-sonneberg.de/Informationen/vp.html");
+			 //request = new HttpGet("http://www.gymnasium-sonneberg.de/Informationen/vp.html");
+                 request = new HttpGet(getURL());
+                 request.setHeader("User-Agent", Util.getUserAgentString(VPlanViewer.this, false));
 			 response = httpclient.execute(request);
 			 }
 			 catch (Exception e) {
@@ -375,95 +397,213 @@ public class VPlanViewer extends Activity {
 		protected void onPostExecute(String result) {
 			System.out.println("--- GET END AT " + System.currentTimeMillis() + " ---");
 			//close the progress dialog  
-            progressDialog.dismiss(); 
-			char gf = (char) 34;
-			String Klasse = PreferenceManager.getDefaultSharedPreferences(VPlanViewer.this).getString("klasse", "");
-			
-			try {
-				if(result != "E") {
-					String gPart = result.split("<td colspan=\"7\" class=\"vpUeberschr\">")[1].split("</td>")[0].replace("        ", "");
-					dateD = gPart;
-				}
-			} catch(Exception ex) {
-				//Allgemeiner Fehler beim Auswerten
-				Log.d("GSApp Vertretungsplan-Check", "Fehler beim Auswerten der Informationen");
-			}
-			
-			if(result != "E") {
-				String gPart = result.split("<tr id=\"Svertretungen\">\n")[1];
-				String[] rawC = gPart.split("\n");
-				
-				String[] newC = clearUp(rawC).split("\n");
-				
-				int counter = 1;
-				int va = 0;
-				String klasse = "";
-				String stunde = "";
-				String orgfach = "";
-				String vertret = "";
-				String raum = "";
-				String verfach = "";
-				String bemerkung = "";
-				
-				for(String cnt : newC) {
-					if(counter == 1) {
-						klasse = cnt;
-						counter = counter + 1;
-					} else if(counter == 2) {
-						stunde = cnt;
-						counter = counter + 1;
-					} else if(counter == 3) {
-						orgfach = cnt;
-						counter = counter + 1;
-					} else if(counter == 4) {
-						vertret = cnt;
-						counter = counter + 1;
-					} else if(counter == 5) {
-						raum = cnt;
-						counter = counter + 1;
-					} else if(counter == 6) {
-						verfach = cnt;
-						counter = counter + 1;
-					} else if(counter == 7) {
-						bemerkung = cnt;
-						counter = 1;
-						
-						if(Klasse.equals("")) {
-							isFiltered = false;
-							displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
-							va = va + 1;
-							klasse = "";
-							stunde = "";
-							orgfach = "";
-							vertret = "";
-							raum = "";
-							verfach = "";
-							bemerkung = "";
-						} else {
-							isFiltered = true;
-							Filter = Klasse;
-							String skl = String.valueOf(klasse.charAt(0));
-							String SUCL = klasse.replace("/2", " " + skl + ".2");
-							SUCL = SUCL.replace("/3", " " + skl + ".3");
-							SUCL = SUCL.replace("/4", " " + skl + ".4");
-							SUCL = SUCL.replace("/5", " " + skl + ".5");
-							
-							if(SUCL.contains(Klasse)) {
-								displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
-								va = va + 1;
-							}
-						}
-					}
-				}
-				System.out.println("--- PARSE END AT " + System.currentTimeMillis() + " ---");
-				displayAll();
-				System.out.println("--- DISPLAY END AT " + System.currentTimeMillis() + " ---");
-			} else {
-				mkMsg("Space error :(");
-			}
+            progressDialog.dismiss();
+
+            try {
+                char gf = (char) 34;
+                String Klasse = PreferenceManager.getDefaultSharedPreferences(VPlanViewer.this).getString("klasse", "");
+
+                try {
+                    if(result != "E") {
+                        String gPart = result.split("<td colspan=\"7\" class=\"vpUeberschr\">")[1].split("</td>")[0].replace("        ", "");
+                        dateD = gPart;
+                        String bemerkung = result.split("<tr id=\"Shinweis\">")[1].split("</tr>")[0].replace("Hinweis: <br />","").replace("<br />", "· ").replaceAll("\\<.*?>", "").replace("&uuml;", "ü").replace("&Uuml;", "Ü").replace("&auml;", "ä").replace("&Auml;", "Ä").replace("&ouml;", "ö").replace("&Ouml;", "Ö").replace("&szlig;", "ß").replaceAll("[\\\r\\\n]+", "").trim();
+                        hinweisD = bemerkung;
+
+                    }
+                } catch(Exception ex) {
+                    //Allgemeiner Fehler beim Auswerten
+                    Log.d("GSApp VPC", "Fehler beim Auswerten der Informationen");
+                }
+
+                if(result != "E") {
+                    String gPart = result.split("<tr id=\"Svertretungen\">\n")[1];
+                    String[] rawC = gPart.split("\n");
+
+                    String[] newC = clearUp(rawC).split("\n");
+
+                    int counter = 1;
+                    int va = 0;
+                    String klasse = "";
+                    String stunde = "";
+                    String orgfach = "";
+                    String vertret = "";
+                    String raum = "";
+                    String verfach = "";
+                    String bemerkung = "";
+
+                    for(String cnt : newC) {
+                        if(counter == 1) {
+                            klasse = cnt;
+                            counter = counter + 1;
+                        } else if(counter == 2) {
+                            stunde = cnt;
+                            counter = counter + 1;
+                        } else if(counter == 3) {
+                            orgfach = cnt;
+                            counter = counter + 1;
+                        } else if(counter == 4) {
+                            vertret = cnt;
+                            counter = counter + 1;
+                        } else if(counter == 5) {
+                            raum = cnt;
+                            counter = counter + 1;
+                        } else if(counter == 6) {
+                            verfach = cnt;
+                            counter = counter + 1;
+                        } else if(counter == 7) {
+                            bemerkung = cnt;
+                            counter = 1;
+
+                            if(Klasse.equals("")) {
+                                isFiltered = false;
+                                displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                                va = va + 1;
+                                klasse = "";
+                                stunde = "";
+                                orgfach = "";
+                                vertret = "";
+                                raum = "";
+                                verfach = "";
+                                bemerkung = "";
+                            } else {
+                                isFiltered = true;
+                                Filter = Klasse;
+                                String skl = String.valueOf(klasse.charAt(0));
+                                String SUCL = klasse.replace("/2", " " + skl + ".2");
+                                SUCL = SUCL.replace("/3", " " + skl + ".3");
+                                SUCL = SUCL.replace("/4", " " + skl + ".4");
+                                SUCL = SUCL.replace("/5", " " + skl + ".5");
+
+                                if(SUCL.length() == 1) {
+                                    if(Klasse.startsWith(SUCL)) {
+                                        displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                                        va = va + 1;
+                                    }
+                                } else {
+                                    if (SUCL.contains(Klasse)) {
+                                        displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                                        va = va + 1;
+                                    }
+                                }
+                            }
+                        }
+                    }
+                    System.out.println("--- PARSE END AT " + System.currentTimeMillis() + " ---");
+                    displayAll();
+                    System.out.println("--- DISPLAY END AT " + System.currentTimeMillis() + " ---");
+                } else {
+                    mkMsg("Space error :(");
+                }
+            } catch (ArrayIndexOutOfBoundsException e) {
+                fallbackLoad(result);
+            }
+
 		}
 
 	}
+
+    private void fallbackLoad(String result) {
+        Log.d("GSApp", "--------- LOADING FALLBACK ----------");
+        char gf = (char) 34;
+        String Klasse = PreferenceManager.getDefaultSharedPreferences(VPlanViewer.this).getString("klasse", "");
+
+        try {
+            if(result != "E") {
+                String gPart = result.split("<td colspan=\"7\" class=\"vpUeberschr\">")[1].split("</td>")[0].replace("        ", "");
+                dateD = gPart;
+                String bemerkung = result.split("<tr id=\"Shinweis\">")[1].split("</tr>")[0].replace("Hinweis: <br />","").replace("<br />", "· ").replaceAll("\\<.*?>", "").replace("&uuml;", "ü").replace("&Uuml;", "Ü").replace("&auml;", "ä").replace("&Auml;", "Ä").replace("&ouml;", "ö").replace("&Ouml;", "Ö").replace("&szlig;", "ß").replaceAll("[\\\r\\\n]+", "").trim();
+                hinweisD = "[!] " + bemerkung;
+            }
+        } catch(Exception ex) {
+            //Allgemeiner Fehler beim Auswerten
+            hinweisD = "[!] kein Hinweis";
+            Log.d("GSApp VPCF", "Fehler beim Auswerten der Informationen");
+        }
+
+        if(result != "E") {
+            String gPart = result.split("<td class=\"vpTextZentriert\">", 2)[1];
+            String[] rawC = gPart.split("\n");
+
+            String[] newC = clearUp(rawC).split("\n");
+
+            int counter = 1;
+            int va = 0;
+            String klasse = "";
+            String stunde = "";
+            String orgfach = "";
+            String vertret = "";
+            String raum = "";
+            String verfach = "";
+            String bemerkung = "";
+
+            for(String cnt : newC) {
+                if(counter == 1) {
+                    klasse = cnt;
+                    counter = counter + 1;
+                } else if(counter == 2) {
+                    stunde = cnt;
+                    counter = counter + 1;
+                } else if(counter == 3) {
+                    orgfach = cnt;
+                    counter = counter + 1;
+                } else if(counter == 4) {
+                    vertret = cnt;
+                    counter = counter + 1;
+                } else if(counter == 5) {
+                    raum = cnt;
+                    counter = counter + 1;
+                } else if(counter == 6) {
+                    verfach = cnt;
+                    counter = counter + 1;
+                } else if(counter == 7) {
+                    bemerkung = cnt;
+                    counter = 1;
+
+                    if(Klasse.equals("")) {
+                        isFiltered = false;
+                        displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                        va = va + 1;
+                        klasse = "";
+                        stunde = "";
+                        orgfach = "";
+                        vertret = "";
+                        raum = "";
+                        verfach = "";
+                        bemerkung = "";
+                    } else {
+                        isFiltered = true;
+                        Filter = Klasse;
+                        String skl = String.valueOf(klasse.charAt(0));
+                        String SUCL = klasse.replace("/2", " " + skl + ".2");
+                        SUCL = SUCL.replace("/3", " " + skl + ".3");
+                        SUCL = SUCL.replace("/4", " " + skl + ".4");
+                        SUCL = SUCL.replace("/5", " " + skl + ".5");
+
+                        if(SUCL.length() == 1) {
+                            if(Klasse.startsWith(SUCL)) {
+                                displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                                va = va + 1;
+                            }
+                        } else {
+                            if (SUCL.contains(Klasse)) {
+                                displayStuff(klasse, stunde, orgfach, vertret, raum, verfach, bemerkung);
+                                va = va + 1;
+                            }
+                        }
+                    }
+                }
+            }
+            System.out.println("--- PARSE END AT " + System.currentTimeMillis() + " ---");
+            displayAll();
+
+
+
+            System.out.println("--- DISPLAY END AT " + System.currentTimeMillis() + " ---");
+        } else {
+            mkMsg("Space error :(");
+        }
+    }
 	
 	private void displayStuff(String klasse, String stunde, String fachnormal, String vertretung, String raum, String fachvertret, String bemerkung) {
 		Eintrag mei = new Eintrag(klasse, stunde, fachnormal, vertretung, raum, fachvertret, bemerkung);
@@ -472,6 +612,32 @@ public class VPlanViewer extends Activity {
 		//TextView vpv = (TextView) findViewById(R.id.vpView);
 		//vpv.setText(vpv.getText().toString().replace("Laden...", "") + "\n\nKlasse: " + klasse + " || Stunde: " + stunde + " || Fach normal: " + fachnormal + " || Vertretung: " + vertretung + " || Raum: " + raum + " || Fach vertr.: " + fachvertret + " || Bemerkung: " + bemerkung);
 	}
+
+
+
+    private String getURL() {
+        int mode = PreferenceManager.getDefaultSharedPreferences(this).getInt("debugSrc", 0);
+        String URL = null;
+        switch (mode) {
+            case 0:
+                URL = "http://www.gymnasium-sonneberg.de/Informationen/vp.html";
+                break;
+            case 1:
+                URL = "http://gsapp.xorg.ga/debug/vp.html";
+                break;
+            case 2:
+                URL = "http://gsapp.xorg.ga/debug/vp2.html";
+                break;
+            case 3:
+                URL = "http://gsapp.xorg.ga/debug/vp3.html";
+                break;
+            default:
+                URL = "http://www.gymnasium-sonneberg.de/Informationen/vp.html";
+                break;
+        }
+
+        return URL;
+    }
 	
 	private void displayAll() {
 		mCardView.clearCards();
@@ -563,6 +729,12 @@ public class VPlanViewer extends Activity {
 			mCardView.addCard(new MyPlayCard("ERROR", "KeineEinträgeException", "#FF0000", "#FF0000", false, false, isDarkUI));
 			e.printStackTrace();
 		}
+
+        if(Util.hasSoftNavigation(this)) {
+            CardStack spacer = new CardStack();
+            spacer.setTitle("\n\n\n\n\n-");
+            mCardView.addStack(spacer);
+        }
 		
 		mCardView.refresh();
 	}
@@ -695,6 +867,8 @@ public class VPlanViewer extends Activity {
 			return cInformatik;
 		case "wr":
 			return cWirtschaftRecht;
+        case "ge":
+            return cGeschichte;
 		default:
 			return cSport;
 			
@@ -739,6 +913,18 @@ public class VPlanViewer extends Activity {
 			return "Informatik";
 		case "wr":
 			return "Wirtschaft/Recht";
+        case "ge":
+            return "Geschichte";
+        case "fr":
+            return "Französisch";
+        case "ru":
+            return "Russisch";
+        case "la":
+            return "Latein";
+        case "gewi":
+            return "Gesellschaftswissenschaften";
+        case "&nbsp;":
+            return "keine Angabe";
 		default:
 			return fach;
 			
@@ -836,7 +1022,7 @@ class Eintrag {
 		return Fachnormal;
 	}
 	public String getVertretung() {
-		if(Vertretung.equals("##")) {
+		if(Vertretung.equals("##") || Vertretung.equals("&nbsp;")) {
 			return "niemandem";
 		} else {
 			return Vertretung;
@@ -850,7 +1036,7 @@ class Eintrag {
 		}
 	}
 	public String getFachVertretung() {
-		if(Fachvertret.equals("##")) {
+		if(Fachvertret.equals("##") || Vertretung.equals("&nbsp;")) {
 			return "nichts";
 		} else {
 			return Fachvertret;

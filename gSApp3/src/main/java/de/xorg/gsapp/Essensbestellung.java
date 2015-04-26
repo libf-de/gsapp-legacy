@@ -7,6 +7,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -17,7 +18,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import de.xorg.gsapp.R;
 
-public class Essensbestellung extends Activity { 
+public class Essensbestellung extends ActionBarActivity {
 	
 	
 	//Variable für URL
@@ -33,16 +34,12 @@ public class Essensbestellung extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Boolean BeanUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("bean", false);
-		if(BeanUI) {
-			setTheme(R.style.AppThemeBlack);
-		} else {
-			setTheme(R.style.AppTheme);
-		}
+        Util.setThemeUI(this);
 		setContentView(R.layout.webviewer);
 
         l = new GALog(this);
-		
-		Util.setTranscluent(this, BeanUI);
+
+        Util.setOrientation(this);
 		
 		//Variablen
 		WebView Speisen = (WebView) findViewById(R.id.WebView);

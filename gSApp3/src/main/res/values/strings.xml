@@ -11,13 +11,13 @@
     <string name="Settings">Einstellungen</string>
     <string name="Kontakt">Kontakt</string>
     <string name="Sgspp">GSApp</string>
-    <string name="Shpurl">http://thexorg.tk/</string>
-    <string name="version">4.5 "Gino"</string>
-    <string name="build">Release 6</string>
+    <string name="Shpurl">http://xorg.ga/</string>
+    <string name="version">The Bleeding Edge</string>
+    <string name="build">TBE</string>
     <string name="codedby">Written by Xorg (Fabian S.)</string>
     <string name="woche">Diese/nächste Woche</string>
     <string name="crash_toast_text">Sorry, GSApp wurde unerwartet beendet. Bitte sende einen Bugreport an den Entwicker</string>
-    <string name="crash_dialog_title">GSApp "Gino" SEGVd</string>
+    <string name="crash_dialog_title">GSApp "TBE" SEGVd</string>
     <string name="crash_dialog_text">Ein unerwarteter Fehler hat zum Absturz von GSApp geführt. Bitte sende einen Fehlerbericht an den Entwicker, um beim Beheben des Fehlers zu helfen.</string>
     <string name="crash_dialog_comment_prompt">Fügen sie hier Kommentare zu ihrem Problem hinzu:</string>
     <string name="crash_dialog_ok_toast">Danke, das sie beim Entwickeln helfen!</string>
@@ -25,5 +25,9 @@
     <string name="title_item_detail">Item Detail</string>
     <string name="title_activity_tutorial">Anleitung</string>
     <string name="hello_world">Hello world!</string>
+    <string name="title_activity_crash">CrashActivity</string>
+    <string name="title_activity_first_run">Erster Start</string>
+
+    <string name="klasse_desc">Wenn du nur deine Klasse im Vertretungsplan sehen möchtest, wähle sie hier aus:</string>
 
 </resources>

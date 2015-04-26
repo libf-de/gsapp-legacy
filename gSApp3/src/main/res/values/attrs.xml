@@ -2,4 +2,5 @@
 <resources>
       <attr name="pageMargin" format="reference|dimension" />
       <attr name="pageMarginBottom" format="reference|dimension" />
+      <attr name="pageMarginBottomSV" format="reference|dimension" />
 </resources>

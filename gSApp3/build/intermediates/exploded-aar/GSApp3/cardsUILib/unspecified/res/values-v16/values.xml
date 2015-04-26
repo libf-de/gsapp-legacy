@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <!-- From: file:/home/xorg/src/AndroidstudioProjects/GSApp3/cardsUILib/src/main/res/values-v16/styles.xml -->
+    <!-- From: file:/home/xorg/Android/AndroidstudioProjects/GSApp3/cardsUILib/src/main/res/values-v16/styles.xml -->
     <eat-comment/>
     <style name="CardLightText" parent="@style/CardText">
         <item name="android:textColor">@color/card_light_text</item>

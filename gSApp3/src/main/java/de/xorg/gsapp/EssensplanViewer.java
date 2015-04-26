@@ -5,6 +5,7 @@ import android.app.Activity;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.Window;
@@ -14,7 +15,7 @@ import android.webkit.WebViewClient;
 import android.widget.RelativeLayout;
 import de.xorg.gsapp.R;
 
-public class EssensplanViewer extends Activity { 
+public class EssensplanViewer extends ActionBarActivity {
 	
 	
 	//Variable für URL
@@ -31,14 +32,10 @@ public class EssensplanViewer extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Boolean BeanUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("bean", false);
-		if(BeanUI) {
-			setTheme(R.style.AppThemeBlack);
-		} else {
-			setTheme(R.style.AppTheme);
-		}
+        Util.setThemeUI(this);
 		setContentView(R.layout.webviewer);
-		
-		Util.setTranscluent(this, BeanUI);
+
+        Util.setOrientation(this);
 		
 		//Variablen
 		WebView Speisen = (WebView) findViewById(R.id.WebView);
@@ -62,7 +59,7 @@ public class EssensplanViewer extends Activity {
 		
 	    isConnected = cd.isConnectingToInternet();
 		
-		URI = "http://www.gymnasium-sonneberg.de/Informationen/Speiseplan/spA.html";
+		URI = "http://gsapp.xorg.ga/epA.php";
 		
 		getWindow().setFeatureInt( Window.FEATURE_PROGRESS, Window.PROGRESS_VISIBILITY_ON);
 		
@@ -114,15 +111,15 @@ public class EssensplanViewer extends Activity {
 	    case R.id.woche:
 	    	 if(VIEW.equalsIgnoreCase("A")) {
 	    			String URL;
-	    			URL = "http://www.gymnasium-sonneberg.de/Informationen/Speiseplan/spA.html";
-	    			URI = "http://www.gymnasium-sonneberg.de/Informationen/Speiseplan/spA.html";
+                    URL = "http://gsapp.xorg.ga/epB.php";
+                    URI = "http://gsapp.xorg.ga/epB.php";
 	    		 VIEW = "B";
 	    		 setTitle("Speiseplan (Nächste Woche)");
 	    		 openUrl(URL);
 	    	 } else {
 	    		 String URL;
-	    		 URL = "http://www.gymnasium-sonneberg.de/Informationen/Speiseplan/spB.html";
-	    		 URI = "http://www.gymnasium-sonneberg.de/Informationen/Speiseplan/spB.html";
+                 URL = "http://gsapp.xorg.ga/epA.php";
+                 URI = "http://gsapp.xorg.ga/epA.php";
 	    		 VIEW = "A";
 	    		 setTitle("Speiseplan (Diese Woche)");
 	    		 openUrl(URL);

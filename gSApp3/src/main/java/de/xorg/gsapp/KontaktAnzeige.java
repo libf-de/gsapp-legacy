@@ -8,6 +8,7 @@ import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.View;
 import android.view.View.OnClickListener;
@@ -16,20 +17,14 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class KontaktAnzeige extends Activity {
+public class KontaktAnzeige extends ActionBarActivity {
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
 		Boolean BeanUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("bean", false);
-		if(BeanUI) {
-			setTheme(R.style.AppThemeBlack);
-		} else {
-			setTheme(R.style.AppTheme);
-		}
+        Util.setThemeUI(this);
 		setContentView(R.layout.kontaktzeug);
-		
-		Util.setTranscluent(this, BeanUI);
 		
 		Button AnrufLohau = (Button) findViewById(R.id.lohauAnruf);
 		Button AnrufDamm = (Button) findViewById(R.id.dammAnruf);
@@ -37,17 +32,8 @@ public class KontaktAnzeige extends Activity {
 		Button MailLohau = (Button) findViewById(R.id.lohauMail);
 		Button MailDamm = (Button) findViewById(R.id.dammMail);
 		Button MailXorg = (Button) findViewById(R.id.xorgMail);
-		
-		Boolean TabletUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("tablet", false);
-		if(TabletUI) {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-			AnrufLohau.setEnabled(false);
-			AnrufDamm.setEnabled(false);
-		} else {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-			AnrufLohau.setEnabled(true);
-			AnrufDamm.setEnabled(true);
-		}
+
+        Util.setOrientation(this);
 		
 		setTitle("Kontakt");
 		

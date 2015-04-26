@@ -26,6 +26,7 @@ import android.graphics.Color;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
+import android.support.v7.app.ActionBarActivity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -37,7 +38,7 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 import de.xorg.gsapp.R;
 
-public class InternetViewer extends Activity {
+public class InternetViewer extends ActionBarActivity {
 	public final static String EXTRA_URL = "de.xorg.gsapp.MESSAGE";
 	
 	@SuppressWarnings("unused")
@@ -56,16 +57,11 @@ public class InternetViewer extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		this.getWindow().requestFeature(Window.FEATURE_PROGRESS);
 		Boolean BeanUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("bean", false);
-		if(BeanUI) {
-			setTheme(R.style.AppThemeBlack);
-		} else {
-			setTheme(R.style.AppTheme);
-		}
+        Util.setThemeUI(this);
 		setContentView(R.layout.webviewer);
-		
-		Util.setTranscluent(this, BeanUI);
+
+        Util.setOrientation(this);
 	    
 	    RelativeLayout widerrist = (RelativeLayout) findViewById(R.id.withers);
 	    if(BeanUI) {

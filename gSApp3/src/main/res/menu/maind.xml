@@ -7,12 +7,20 @@
         android:title="@string/action_settings"/>
     <item 
         android:id="@+id/action_about" 
-        android:title="Über" 
+        android:title="Über"
+        android:showAsAction="never"
         android:orderInCategory="100"/>
     
     <item 
         android:id="@+id/action_fcheck" 
         android:title="Entwickler: Überprüfung erzw."
+        android:showAsAction="never"
+        android:orderInCategory="100"/>
+
+    <item
+        android:id="@+id/action_devsetting"
+        android:title="Entwicklereinstellungen"
+        android:showAsAction="never"
         android:orderInCategory="100"/>
     
     <item

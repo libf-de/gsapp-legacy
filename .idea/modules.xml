@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/gSApp3/GSApp.iml" filepath="$PROJECT_DIR$/gSApp3/GSApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/GSApp3.iml" filepath="$PROJECT_DIR$/GSApp3.iml" />
       <module fileurl="file://$PROJECT_DIR$/cardsUILib/cardsUILib.iml" filepath="$PROJECT_DIR$/cardsUILib/cardsUILib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/gSApp3/gSApp3.iml" filepath="$PROJECT_DIR$/gSApp3/gSApp3.iml" />
     </modules>
   </component>
 </project>

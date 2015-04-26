@@ -1,6 +1,7 @@
 /home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/classes/release
 /home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/release/support-annotations-21.0.3-2599a089642802428dda2bdcdb1829b4b43d2072.jar
 /home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/release/systembartint-1.0.2-081c60862bdfa43995fa842776917405350f71ba.jar
+/home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/release/classes-6e6fc17e58383b0905e6e285b137483dd6f38d17.jar
 /home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/release/classes-d105eeae06fe63faed3397006a893bc7fcbf3b5c.jar
 /home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/release/nineoldandroids-2.4.0-67ab96e25cb94676b21b66b84303a62a94115f46.jar
 /home/xorg/src/AndroidstudioProjects/GSApp3/gSApp3/build/intermediates/pre-dexed/release/acra-4.5.0-df8b4eb0d97e161f69037e61f1ba2d655f2985c5.jar

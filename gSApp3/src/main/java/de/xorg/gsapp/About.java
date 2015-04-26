@@ -11,6 +11,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.ActivityInfo;
 import android.graphics.Color;
+import android.support.v7.app.ActionBarActivity;
 import android.util.DisplayMetrics;
 import android.util.Log;
 import android.view.View;
@@ -21,7 +22,7 @@ import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
-public class About extends Activity {
+public class About extends ActionBarActivity {
 	
 	// Zähler für Easter-Egg
 	public static int EggPressed = 0;
@@ -35,26 +36,16 @@ public class About extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+        Thread.setDefaultUncaughtExceptionHandler(new ExceptionHandler(this));
+
 		Boolean BeanUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("bean", false);
-		if(BeanUI) {
-			setTheme(R.style.AppThemeBlack);
-		} else {
-			setTheme(R.style.AppTheme);
-		}
+        Util.setThemeUI(this);
 		setContentView(R.layout.about);
 
         l = new GALog(this);
 		
-		// Farbigen Transcluent Mode aktivieren
-		Util.setTranscluent(this, BeanUI);
-		
 		//Tablet-Oberfläche anwenden
-		Boolean TabletUI = PreferenceManager.getDefaultSharedPreferences(this).getBoolean("tablet", false);
-		if(TabletUI) {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_SENSOR);
-		} else {
-			setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
-		}
+        Util.setOrientation(this);
 		
 		//BlackBean (schwarzes Design) einstellen
 		SetBean(BeanUI);
@@ -73,8 +64,10 @@ public class About extends Activity {
 			
 			@Override
 			public void onClick(View v) {
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://gsapp.xorg.ga/gino/"));
-				startActivity(browserIntent);
+
+                throw new RuntimeException("This is a crash");
+				//Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://gsapp.xorg.ga/gino/"));
+				//startActivity(browserIntent);
 			}
 		});
 		
@@ -148,6 +141,16 @@ public class About extends Activity {
 			    }, 2000);
 			}
 		});
+
+        B2.setOnLongClickListener(new OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View v) {
+                Toast.makeText(About.this, "Entwickereinstellungen werden geöffnet...", Toast.LENGTH_SHORT).show();
+                Intent intentes = new Intent(About.this, DeveloperSettings.class);
+                startActivity(intentes);
+                return false;
+            }
+        });
 		
 		HPButton.setOnClickListener(new OnClickListener() {
 			@Override
@@ -160,7 +163,7 @@ public class About extends Activity {
 		B3.setOnClickListener(new OnClickListener() {
 			@Override
 			public void onClick(View v) {				
-				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://tslink.tk/gsapp-license"));
+				Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("http://gsapp.xorg.ga/opensource"));
 				startActivity(browserIntent);
 			}
 		});

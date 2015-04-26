@@ -1,5 +1,6 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -7,11 +8,12 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:id="@+id/withers"
+    android:orientation="vertical"
     tools:context=".MainActivity" >
 
     <ImageView
         android:id="@+id/imageView1"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
@@ -19,66 +21,167 @@
         android:layout_marginTop="?pageMargin"
         android:src="@drawable/pistor" />
 
-    <Button
+    <android.support.v7.widget.CardView
         android:id="@+id/VertretungsplanButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/imageView1"
         android:layout_marginTop="20dp"
-        android:onClick="zeigeVP"
-        android:text="@string/VPlan" />
+        card_view:cardBackgroundColor="@color/button_material_light"
+        android:onClick="zeigeVP">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="@style/CardTitle">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:text="Vertretungsplan"
+            android:gravity="center"
+            android:textColor="@color/primary_text_default_material_light"
+            android:onClick="zeigeVP"
+            android:layout_margin="5dp"
+            style="@style/CardTitle"
+            android:textSize="18sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-    <Button
+    <android.support.v7.widget.CardView
         android:id="@+id/TerminButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/VertretungsplanButton"
-        android:onClick="zeigeTM"
-        android:text="@string/Termin" />
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/button_material_light"
+        android:onClick="zeigeTM">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="@style/CardTitle">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Termine"
+                android:gravity="center"
+                android:textColor="@color/primary_text_default_material_light"
+                android:onClick="zeigeTM"
+                android:layout_margin="5dp"
+                style="@style/CardTitle"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-    <Button
+    <android.support.v7.widget.CardView
         android:id="@+id/AktuellesButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/TerminButton"
-        android:onClick="zeigeAK"
-        android:text="@string/Aktuell" />
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/button_material_light"
+        android:onClick="zeigeAK">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="@style/CardTitle">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Aktuelles"
+                android:gravity="center"
+                android:textColor="@color/primary_text_default_material_light"
+                android:onClick="zeigeAK"
+                android:layout_margin="5dp"
+                style="@style/CardTitle"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-    <Button
+    <android.support.v7.widget.CardView
         android:id="@+id/EssensplanButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/AktuellesButton"
-        android:onClick="zeigeEP"
-        android:text="Speiseplan" />
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/button_material_light"
+        android:onClick="zeigeEP">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="@style/CardTitle">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Speiseplan"
+                android:gravity="center"
+                android:textColor="@color/primary_text_default_material_light"
+                android:onClick="zeigeEP"
+                android:layout_margin="5dp"
+                style="@style/CardTitle"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-    <Button
+    <android.support.v7.widget.CardView
         android:id="@+id/EssensbestellungButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/EssensplanButton"
-        android:onClick="zeigeEB"
-        android:text="Essenbestellung" />
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/button_material_light"
+        android:onClick="zeigeEB">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="@style/CardTitle">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Essenbestellung"
+                android:gravity="center"
+                android:textColor="@color/primary_text_default_material_light"
+                android:onClick="zeigeEB"
+                android:layout_margin="5dp"
+                style="@style/CardTitle"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
-    <Button
+    <android.support.v7.widget.CardView
         android:id="@+id/KontaktButton"
-        android:layout_width="wrap_content"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentLeft="true"
         android:layout_alignParentRight="true"
-        android:layout_below="@+id/EssensbestellungButton"
-        android:onClick="zeigeKT"
-        android:text="Kontakt" />
+        android:layout_marginTop="10dp"
+        card_view:cardBackgroundColor="@color/button_material_light"
+        android:onClick="zeigeKT">
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            style="@style/CardTitle">
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:text="Kontakt"
+                android:gravity="center"
+                android:textColor="@color/primary_text_default_material_light"
+                android:onClick="zeigeKT"
+                android:layout_margin="5dp"
+                style="@style/CardTitle"
+                android:textSize="18sp" />
+        </LinearLayout>
+    </android.support.v7.widget.CardView>
 
     <TextView
         android:id="@+id/InfoAdapter"
@@ -92,4 +195,13 @@
         android:text=""
         android:textAppearance="?android:attr/textAppearanceMedium" />
 
-</RelativeLayout>
+    <Button
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Crash Test / Bugreport"
+        android:id="@+id/crashTest"
+        android:layout_gravity="center_horizontal"
+        android:onClick="crashTester" />
+
+</LinearLayout>
